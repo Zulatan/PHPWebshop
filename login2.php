@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         } else {
             // Password is incorrect
-            echo "Invalid email or password.";
+            echo "<p style='color: red'>Invalid email or password.</p>";
         }
     } else {
         // No user found with the given email
@@ -73,7 +73,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 <div>
     <h1>Log into your account.</h1>
-    <p>Fill out the forms, then click login.</p>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <p>Email: </p>
         <label for="email">

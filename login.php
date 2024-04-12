@@ -59,7 +59,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <div>
         <h1>Log into your account.</h1>
         <p>Fill out the forms, then click login.</p>
-        <form method="post" action="products.php">
+        <form method="post" action=".php">
             <p>Email: </p>
             <label for="email">
                 <input type="text" name="email" placeholder="Your Email" value="<?php echo "" ?>" required>
