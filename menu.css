@@ -1,40 +1,133 @@
-nav ul {
-    list-style: none;
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+.welcomeText {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+}
+
+/* Style for the Combined menu = Product menu + User Menu */
+.combined-menu {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/* Style for the product menu */
+.product-menu {
+    font-family: 'Roboto', sans-serif;
+    list-style-type: none;
     padding: 0;
     margin: 0;
+   /* border-bottom: 1px solid; */
+    display: flex;
+
 }
 
-nav ul li {
+.product-menu li {
     display: inline-block;
     position: relative;
+    /*background: rgba(0, 0, 0, .1);*/
+    background: rgba(255, 170, 0, 1);
+    /* border-right: 1px solid black;  Add border to separate categories */
+    min-width: 100px;
 }
 
-nav ul li a {
-    display: block;
-    padding: 10px 20px;
+.product-menu li:last-child {
+    border-right: none; /* Remove border from last item to avoid extra line */
+}
+
+.product-menu li a {
+    display: flex;
+    justify-content: center;
+    padding: 10px 25px;
     text-decoration: none;
     color: #333;
-    font-weight: bold;
+    font-size: 14px;
+
 }
 
-nav ul li:hover > ul {
-    display: block;
+.product-menu li:hover {
+    background-color: rgba(255, 170, 0, .8); /* Halve the opacity of the background when hovered */
 }
 
-nav ul ul {
+ul ul {
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
     background-color: #fff;
-    border: .1px solid transparent;
+    padding: 0;
+    margin: 0;
+
 }
 
-nav ul ul li {
+ul li:hover > ul {
+    display: block;
+    min-width: 100px;
+}
+
+ul ul li {
+    display: block;
+    position: relative;
+    min-width: 100px;
+    max-width: 100px;
+}
+
+ul ul ul {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background-color: #fff;
+    padding: 0;
+    margin: 0;
+}
+
+ul ul li:hover > ul {
     display: block;
 }
 
-nav ul ul li a {
-    padding: 10px 20px;
+ul ul li a {
+    padding: 15px 25px;
 }
+
+
+/* below is everything regarding the user menu = Profile, Cart */
+
+.user-menu {
+}
+
+.user-menu nav {
+}
+
+.user-menu nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.user-menu nav ul li {
+    display: flex;
+}
+
+.user-menu nav ul li a {
+    padding: 10px 25px;
+}
+
+.user-menu nav ul li a i {
+}
+
+.user-menu nav ul li a i:hover {
+color: rgba(255, 170, 0, 1);
+}
+
+/*.user-menu nav ul li a:nth-child(-n + 1) {
+    padding: 1px;
+}*/
+
+
 

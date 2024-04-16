@@ -2,7 +2,7 @@
 // Start the session
 session_start();
 
-// Check if session is set
+// Check if session "is set = "isset"" hvis ja - tillad connection til db og til info på website
 if(isset($_SESSION['status']) && $_SESSION['status'] == true) {
     // If the session is set, display welcome message and products
     require_once 'db_connection_test.php';
@@ -15,44 +15,6 @@ if(isset($_SESSION['status']) && $_SESSION['status'] == true) {
         'PHPWebshop'
     );
 
-
-
-
-
-    /*$getProductCategory = $conn->query("SELECT name, parent_id FROM products WHERE parent_id = NULL");
-    if ($getProductCategory->num_rows > 0) {
-        // output data of each row
-        while($row = $getProductCategory->fetch_assoc()) {
-            echo "<h3 style='margin: 0 0; padding: 5px 5px'>Product name:</h3>" . $row['name'];
-        }
-    } else {
-        echo "0 results";
-    }
-    $conn->close();
-    */
-
-    /*
-     echo '<h1>Browse our products</h1>';
-
-
-    $products = array(
-        "Computers" => "product_computers",
-        "PC" => "product1.php",
-        "Laptop" => "product_laptops.php",
-        "Phone" => "product3.php"
-    );
-
-    function generateMenu($products) {
-        echo '<ul>';
-        foreach ($products as $productName => $productUrl) {
-
-            echo '<li><a href="' . $productUrl . '">' . $productName . '</a></li>';
-        }
-        echo '</ul>';
-    }
-
-    generateMenu($products);
-     */
 
 } else {
     // If the session is not set, prompt the user to login
@@ -71,74 +33,88 @@ if(isset($_SESSION['status']) && $_SESSION['status'] == true) {
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Our products</title>
+
     <link rel="stylesheet" href="menu.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
     <script src="https://kit.fontawesome.com/2f1765f590.js" crossorigin="anonymous"></script>
     <script src="menu.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            margin: 40px 80px;
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
 </head>
 <body>
-<?php
-
-echo "<p>Hi $username!</p>";
 
 
-# Query for grabbing product categories
-$queryMainProductCategory = "SELECT * FROM products WHERE id in (1,8)";
-$querySubProductCategory = "Select * from products where parent_id = 1";
-$getProductCategory = $conn->query($queryMainProductCategory);
-
-echo "<ul>";
-if ($getProductCategory->num_rows > 0) {
-    // Output data of each row
-    while($row = $getProductCategory->fetch_assoc()) {
-        #echo "<li>" . $row['name'] . "</li>" ;
-        echo "<div class='menu-container' style='display: flex; justify-content: space-between;'>";
-        echo    "<nav>";
-        echo        "<li class='dropdown' style='list-style-type: none'>";
-                        # The head product Category
-        echo            "<a href='product_pcs.php' style='text-decoration: none; color: #333; '>" . $row['name'] . "</a>";
-        echo                "<ul>";
-        echo                    "<li><a href='product_laptops.php'></a></li>";
-        echo                    "<li><a href='product_stationary.php'></a></li>";
-        echo                "</ul>";
-        echo        "</li>";
-        echo    "</nav>";
-        echo "</div>";
-
-
-    }
-} else {
-    echo "0 results";
-}
-
-echo "</ul>";
-
-?>
-    <div class="menu-container" style="display: flex; justify-content: space-between;">
-        <nav> <!-- Navigation for buying stuff -->
-            <ul id="nav1">
-                <li class="dropdown">
-                    <a href="#">Computer</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="product_laptops.php"></a></li>
-                        <li><a href="product_pcs.php">PC</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#">Phone</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="product_laptops.php">iPhone</a></li>
-                        <li><a href="product_pcs.php">Android</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-
-        <nav> <!-- Navigation for user stuff -->
-            <ul id="nav2">
-                <li><a href="user_profile.php"><i class='fa-solid fa-user'></i></a></li>
-                <li><a href="user_cart.php"><i class='fa-solid fa-cart-shopping'></i></a></li>
+<div class="combined-menu">
+    <?php
+    echo "<p>Hi $username!</p>";
+    ?>
+    <div class="user-menu">
+        <nav>  <!-- Nav to User, Cart -->
+            <ul>
+                <li><a style=" color: #333333" href="user_profile.php"><i class='fa-solid fa-user'></i></a></li>
+                <li><a style=" color: #333333 " href="user_cart.php"><i class='fa-solid fa-cart-shopping'></i></a></li>
             </ul>
         </nav>
     </div>
+</div>
+
+<?php
+echo "<h1>Browse our products</h1>"
+?>
+<ul class="product-menu">
+    <?php
+    // Fetch main product categories
+    $queryMainProductCategory = "SELECT * FROM products WHERE id IN (1, 8, 11)";
+    $getProductCategory = $conn->query($queryMainProductCategory);
+
+    if ($getProductCategory->num_rows > 0) {
+        while ($mainCategory = $getProductCategory->fetch_assoc()) {
+            // Output main category
+            echo "<li><a href='#'>" . $mainCategory['name'] . "</a>";
+
+            // Fetch sub-categories for the current main category
+            $querySubProductCategory = "SELECT * FROM products WHERE parent_id = " . $mainCategory['id'];
+            $getSubProductCategory = $conn->query($querySubProductCategory);
+
+            if ($getSubProductCategory->num_rows > 0) {
+                echo "<ul>";
+                while ($subCategory = $getSubProductCategory->fetch_assoc()) {
+                    // Output sub-category
+                    echo "<li><a href='#'>" . $subCategory['name'] . "</a>";
+
+                    # Fetch sub-sub-categories for the current sub category
+                    $querySecondLevelSubCategory = "SELECT * FROM products WHERE parent_id = " . $subCategory['id'];
+                    $getSecondLevelSubCategory = $conn->query($querySecondLevelSubCategory);
+
+                    # Output second level of sub-categories
+                    if ($getSecondLevelSubCategory->num_rows > 0) {
+                        echo "<ul>";
+                        while ($secondLevelSubCategory = $getSecondLevelSubCategory->fetch_assoc()) {
+                            echo "<li><a href='#'>" . $secondLevelSubCategory['name'] . "</a></li>";
+                        }
+                        echo "</ul>";
+                    }
+
+                    echo "</li>";
+                }
+                echo "</ul>";
+            }
+
+            echo "</li>";
+        }
+    } else {
+        echo "0 results";
+    }
+    ?>
+</ul>
+
 </body>
 </html>

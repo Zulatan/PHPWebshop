@@ -15,7 +15,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] == true) {
         'PHPWebshop'
     );
     # menu
-    echo "<a href='products.php'>Home</a>";
+    echo "<a href='products.php'> < Home</a>";
     # Welcome the user
     echo "<p>Welcome to your profile panel, $username</p>";
 
@@ -25,7 +25,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] == true) {
     if ($getUserInfo->num_rows > 0) {
         // output data of each row
         while($row = $getUserInfo->fetch_assoc()) {
-            echo "<h3 style='margin: 0 0; padding: 5px 5px'>Full name:</h3>" . $row['first_name'] . " " . $row['last_name'];
+            echo "<h3 style='margin: 0 0;'>Full name:</h3>" . $row['first_name'] . " " . $row['last_name'];
             echo "<h3 style='margin: 0 0'>Address:</h3>" . $row['address'];
             echo "<h3 style='margin: 0 0'>Phone number:</h3>" . $row['phone'];
             echo "<h3 style='margin: 0 0'>Email:</h3>" . $row['email'];
@@ -47,7 +47,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] == true) {
     // Logout form
     echo <<<logout
     <form id="logoutForm" action="logout.php" method="post">
-        <h4 style="margin-bottom: 0 ">Want to sign out?</h4>
+        <h4 style="margin-bottom: 10px ">Want to sign out?</h4>
         <input type="submit" value="Logout">
     </form>
     logout;
@@ -73,6 +73,14 @@ if (isset($_SESSION['status']) && $_SESSION['status'] == true) {
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Your profile</title>
+
+    <link rel="stylesheet" href="user-profile.css">
+    <style>
+        body {
+            margin: 40px 80px;
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
 </head>
 <body>
 
