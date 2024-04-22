@@ -15,7 +15,8 @@ if (isset($_SESSION['status']) && $_SESSION['status'] == true) {
         'PHPWebshop'
     );
     # menu
-    echo "<a href='products.php'> < Home</a>";
+    echo "<a href='products.php'> < Back</a>";
+
     # Welcome the user
     echo "<p>Welcome to your profile panel, $username</p>";
 
@@ -39,9 +40,9 @@ if (isset($_SESSION['status']) && $_SESSION['status'] == true) {
 
 
 
+    // Admin panel direction
 
 
-    # html stuff
 
 
     // Logout form
@@ -51,9 +52,6 @@ if (isset($_SESSION['status']) && $_SESSION['status'] == true) {
         <input type="submit" value="Logout">
     </form>
     logout;
-
-
-    # Fetch data from database
 
 
 } else {
@@ -77,12 +75,13 @@ if (isset($_SESSION['status']) && $_SESSION['status'] == true) {
     <link rel="stylesheet" href="user-profile.css">
     <style>
         body {
-            margin: 40px 80px;
             font-family: 'Poppins', sans-serif;
         }
     </style>
 </head>
 <body>
+    <h2>Admin page</h2>
+    <a href='admin.php'>Admin Page ></a>
 
 </body>
 </html>

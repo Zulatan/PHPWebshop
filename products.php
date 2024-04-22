@@ -44,7 +44,7 @@ if(isset($_SESSION['status']) && $_SESSION['status'] == true) {
     <script src="menu.js" crossorigin="anonymous"></script>
     <style>
         body {
-            margin: 40px 80px;
+            padding: 40px 80px;
             font-family: 'Poppins', sans-serif;
         }
     </style>
@@ -54,13 +54,14 @@ if(isset($_SESSION['status']) && $_SESSION['status'] == true) {
 
 <div class="combined-menu">
     <?php
-    echo "<p>Hi $username!</p>";
+    echo "<p>Hi $username! 👋</p>";
     ?>
     <div class="user-menu">
         <nav>  <!-- Nav to User, Cart -->
             <ul>
+
                 <li><a style=" color: #333333" href="user_profile.php"><i class='fa-solid fa-user'></i></a></li>
-                <li><a style=" color: #333333 " href="user_cart.php"><i class='fa-solid fa-cart-shopping'></i></a></li>
+                <li><a style=" color: #333333" href="cart.php"><i class='fa-solid fa-cart-shopping'></i></a></li>
             </ul>
         </nav>
     </div>
@@ -78,7 +79,7 @@ echo "<h1>Browse our products</h1>"
     if ($getProductCategory->num_rows > 0) {
         while ($mainCategory = $getProductCategory->fetch_assoc()) {
             // Output main category
-            echo "<li><a href='#'>" . $mainCategory['name'] . "</a>";
+            echo "<li><a href='handleCategoryNavigation.php?id=" . $mainCategory['id'] . "'>" . $mainCategory['name'] . "</a>";
 
             // Fetch sub-categories for the current main category
             $querySubProductCategory = "SELECT * FROM products WHERE parent_id = " . $mainCategory['id'];
@@ -88,17 +89,17 @@ echo "<h1>Browse our products</h1>"
                 echo "<ul>";
                 while ($subCategory = $getSubProductCategory->fetch_assoc()) {
                     // Output sub-category
-                    echo "<li><a href='#'>" . $subCategory['name'] . "</a>";
+                    echo "<li><a href='handleCategoryNavigation.php?id=" . $subCategory['id'] . "'>" . $subCategory['name'] . "</a>";
 
-                    # Fetch sub-sub-categories for the current sub category
+                    // Fetch sub-sub-categories for the current sub category
                     $querySecondLevelSubCategory = "SELECT * FROM products WHERE parent_id = " . $subCategory['id'];
                     $getSecondLevelSubCategory = $conn->query($querySecondLevelSubCategory);
 
-                    # Output second level of sub-categories
+                    // Output second level of sub-categories
                     if ($getSecondLevelSubCategory->num_rows > 0) {
                         echo "<ul>";
                         while ($secondLevelSubCategory = $getSecondLevelSubCategory->fetch_assoc()) {
-                            echo "<li><a href='#'>" . $secondLevelSubCategory['name'] . "</a></li>";
+                            echo "<li><a href='handleCategoryNavigation.php?id=" . $secondLevelSubCategory['id'] . "'>" . $secondLevelSubCategory['name'] . "</a></li>";
                         }
                         echo "</ul>";
                     }
@@ -115,6 +116,8 @@ echo "<h1>Browse our products</h1>"
     }
     ?>
 </ul>
+
+
 
 </body>
 </html>

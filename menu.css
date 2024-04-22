@@ -96,13 +96,6 @@ ul ul li a {
 
 
 /* below is everything regarding the user menu = Profile, Cart */
-
-.user-menu {
-}
-
-.user-menu nav {
-}
-
 .user-menu nav ul {
     list-style-type: none;
     padding: 0;
@@ -116,6 +109,7 @@ ul ul li a {
 
 .user-menu nav ul li a {
     padding: 10px 25px;
+    background-color: transparent;
 }
 
 .user-menu nav ul li a i {
