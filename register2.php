@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
         <p>Name: </p>
-        <input type="text" name="first_name" value="<?php echo $first_name; ?>">
+        <input type="text" name="first_name" value="<?php echo $first_name; ?>" pattern="^[a-zA-Z\s]*$">
         <span style="color:red;">* <?php echo $first_nameErr;?></span>
 
         <p>Last Name: </p>
@@ -75,13 +75,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <span style="color:red;">* <?php echo $emailErr;?></span>
 
         <p>Phone: </p>
-        <input type="text" name="phone" value="<?php echo $phone; ?>">
+        <input type="text" name="phone" value="<?php echo $phone; ?>" pattern="[0-9]{8}">
 
         <p>Address: </p>
         <input type="text" name="address" value="<?php echo $address; ?>">
 
         <p>Password: </p>
-        <input type="password" name="password" value="<?php echo $password; ?>">
+        <input type="password" name="password" value="<?php echo $password; ?>" pattern=".{8,}">
         <span style="color:red;">* <?php echo $passwordErr;?></span>
         <br>
         <input type="submit" name="submit" value="Continue">

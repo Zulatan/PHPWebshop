@@ -6,6 +6,9 @@ $conn = mysqli_connect(
     'root',
     'PHPWebshop'
 );
+
+echo "<a href='products.php'> < Back</a>";
+
 ?>
 
 <!doctype html>
@@ -59,6 +62,8 @@ $conn = mysqli_connect(
             <label>Product name:</label><input type="text" name="productName">
             <label>Product description:</label><input type="text" name="productDesc">
             <label>Product price:</label><input type="text" name="productPrice">
+            <label>Product img path:</label><input type="text" name="productImagePath">
+
 
             <input type="submit" name="add">
         </form>

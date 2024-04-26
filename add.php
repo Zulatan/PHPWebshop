@@ -6,6 +6,7 @@ $productParentID = $_POST['productParentID'];
 $productName = $_POST['productName'];
 $productDesc = $_POST['productDesc'];
 $productPrice = $_POST['productPrice'];
+$productImagePath = $_POST['productImagePath'];
 
 $conn = mysqli_connect(
     'localhost',
@@ -14,6 +15,6 @@ $conn = mysqli_connect(
     'PHPWebshop'
 );
 
-mysqli_query($conn, "insert into `products` (id, name, description, price) values ('$productParentID','$productName', '$productDesc', '$productPrice')");
+mysqli_query($conn, "insert into `products` (parent_id, name, description, price, image) values ('$productParentID','$productName', '$productDesc', '$productPrice', '$productImagePath')");
 header('location:admin.php');
 

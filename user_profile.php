@@ -81,7 +81,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] == true) {
 </head>
 <body>
     <h2>Admin page</h2>
-    <a href='admin.php'>Admin Page ></a>
+    <a href='adminLogin.php'>Admin Login ></a>
 
 </body>
 </html>

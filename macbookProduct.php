@@ -1,12 +1,15 @@
 <?php
-// Start or resume the session
 session_start();
 
-// Include database connection
-require_once "db_connection_test.php";
-
-
+$conn = mysqli_connect(
+    'localhost',
+    'root',
+    'root',
+    'PHPWebshop'
+);
 ?>
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -44,6 +47,8 @@ require_once "db_connection_test.php";
     </style>
 </head>
 <body>
+
+
 <!-- The Menu -->
 <div class="combined-menu">
     <ul class="product-menu">
@@ -116,8 +121,8 @@ require_once "db_connection_test.php";
 <?php
 echo "<h1>Browse our MacBooks</h1>";
 
-// Retrieve data for iPhone products from the database
-$queryMacBooks = "SELECT * FROM products WHERE parent_id = 4"; // Assuming parent_id 8 corresponds to iPhone category
+// Retrieve data for macbooks products from the database
+$queryMacBooks = "SELECT * FROM products WHERE parent_id = 4";
 $getMacBooks = $conn->query($queryMacBooks);
 
 // Check if there are any iPhone products
@@ -126,17 +131,23 @@ if ($getMacBooks->num_rows > 0) {
     while ($row = $getMacBooks->fetch_assoc()) { ?>
 
         <!-- Display product details -->
-        <div>
+
             <h2> <?php echo $row['name']?></h2>
             <p> <?php echo $row['description']?></p>
             <p> <?php echo $row['price'] ?>,- DKK </p>
+            <img style="width: 150px; height: auto;" src="/product_images/<?php echo $row['image'] ?>">
         </div>
 
         <!-- Add to Cart form -->
         <form method="POST" action="cart.php?action=add?id=<?php echo $row['id']; ?>">
             <input type="hidden" name="productId" value="<?php echo $row['id']; ?>">
             <input type="number" name="quantity" value="1" min="1">
+            <?php if(isset($_SESSION['status']) && $_SESSION['status'] == true) : ?>
             <input type="submit" name="addToCart" value="Add to Cart">
+            <?php else : ?>
+            <p>Login to add to cart!</p>
+            <a href="login2.php">Login</a>
+            <?php endif; ?>
             <input type="hidden" name="hidden_name" value="<?php echo $row['name']; ?>">
             <input type="hidden" name="hidden_price" value="<?php echo $row['price']; ?>">
         </form>

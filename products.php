@@ -21,6 +21,8 @@ if(isset($_SESSION['status']) && $_SESSION['status'] == true) {
     echo "Please login to see our products!";
     echo '<a href="login2.php">Login</a>';
 }
+
+
 ?>
 
 
